@@ -1,73 +1,27 @@
-# SecureCheck — Password Strength Checker
+# SecureCheck Pro
 
-A clean, responsive, privacy-first password strength checker and password generator built with **HTML, CSS and vanilla JavaScript**.
+Privacy-first password toolkit built with HTML, CSS and vanilla JavaScript.
 
 ## Features
+- Live strength score, checklist, pattern warnings and smart suggestions.
+- Theoretical entropy estimate and illustrative offline guessing-time model.
+- Cryptographically random password generation with Web Crypto and rejection sampling.
+- Local multi-word passphrase generator.
+- Optional Have I Been Pwned range lookup using k-anonymity: only the first 5 SHA-1 hex characters are sent; the full password and full hash are not.
+- In-memory password list audit, duplicate detection and aggregate-only JSON export.
+- Password-free JSON report and print / Save PDF.
+- Dark/light theme and installable offline PWA.
+- No backend, accounts, analytics or browser storage.
 
-- Live password checklist and estimated strength meter
-- Weak, Fair, Good and Strong labels with a score out of 100
-- Show/hide password control
-- Contextual security recommendations
-- Cryptographically random password generator (8–64 characters)
-- Configurable uppercase, lowercase, number and symbol character sets
-- Copy generated password with a clipboard fallback
-- Responsive layout for desktop, tablet and mobile
-- No backend, account, database, analytics or browser storage
+## Run
+Use HTTPS or localhost for Web Crypto, clipboard and service-worker support. GitHub Pages: Settings → Pages → Deploy from a branch → main → /(root).
 
-## Project files
+URL: https://codex-inn.github.io/Password-Strength-Checker/
 
-```text
-Password-Strength-Checker/
-├── index.html
-├── style.css
-├── script.js
-└── README.md
-```
+## Privacy
+Analysis, generation and audits run locally. No password is persisted. Optional breach lookup contacts api.pwnedpasswords.com with only a 5-character SHA-1 prefix; request metadata is still visible to that service. Do not submit sensitive live credentials. Reports omit password text. The service worker caches only static app files.
 
-## Run locally
+## Limitations
+Entropy is an upper-bound estimate based on character classes and assumes random selection; human-chosen patterns reduce real entropy. Guessing time assumes 10 billion guesses/second and half the search space; actual rates vary by hashing algorithm, hardware, salts and attacker knowledge. A clean breach lookup is not proof of safety. The built-in passphrase list is small; prefer a reputable password manager.
 
-1. Clone or download this repository.
-2. Open the project folder.
-3. Open `index.html` in a modern browser.
-
-For the most consistent Web Crypto and clipboard support, serve the folder over localhost (for example, with VS Code Live Server) or use the deployed HTTPS GitHub Pages site.
-
-## Deploy with GitHub Pages
-
-1. Open this repository on GitHub.
-2. Go to **Settings → Pages**.
-3. Under **Build and deployment**, choose **Deploy from a branch**.
-4. Select the `main` branch and `/(root)` folder.
-5. Click **Save** and wait for the Pages deployment to finish.
-
-The site will be available at:
-
-`https://codex-inn.github.io/Password-Strength-Checker/`
-
-## Privacy and security
-
-- Password analysis is performed in the browser tab.
-- The application does not send passwords to a server.
-- The application does not write passwords to localStorage, sessionStorage or cookies.
-- Password generation uses the browser Web Crypto API (`crypto.getRandomValues`) and rejection sampling to avoid modulo bias.
-- No third-party analytics or external password-checking APIs are used.
-- Google Fonts are loaded for typography; no password data is sent to the font provider.
-
-**Important:** Do not enter a real, currently used password into demonstration or educational tools. Use a password manager to create and store unique passwords for your accounts.
-
-## About the strength estimate
-
-The strength meter is a simple educational heuristic based on length, character variety and a few common patterns. It is not a password-cracking simulation, does not calculate reliable crack times, and cannot guarantee that a password is secure. A long, unique passphrase generated and stored with a reputable password manager is generally preferable to a short, complex password that is reused.
-
-## Browser support
-
-Use a modern browser with Web Crypto support. Password generation requires a secure context such as HTTPS or localhost.
-
-## License
-
-This project is available under the MIT License. See [LICENSE](LICENSE) if included in this repository.
-
----
-
-**Author:** Kowshik S  
-**Project:** Cybersecurity learning project
+Use unique passwords and passkeys where supported.
