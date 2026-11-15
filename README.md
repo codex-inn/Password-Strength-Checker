@@ -1,27 +1,42 @@
-# SecureCheck Pro
+# SecureCheck Pro 🔐
 
-Privacy-first password toolkit built with HTML, CSS and vanilla JavaScript.
+A privacy-first password security toolkit built with **HTML, CSS and JavaScript**. Analyze password strength, generate secure passwords and passphrases, check known breach exposure, and run local password audits.
 
 ## Features
-- Live strength score, checklist, pattern warnings and smart suggestions.
-- Theoretical entropy estimate and illustrative offline guessing-time model.
-- Cryptographically random password generation with Web Crypto and rejection sampling.
-- Local multi-word passphrase generator.
-- Optional Have I Been Pwned range lookup using k-anonymity: only the first 5 SHA-1 hex characters are sent; the full password and full hash are not.
-- In-memory password list audit, duplicate detection and aggregate-only JSON export.
-- Password-free JSON report and print / Save PDF.
-- Dark/light theme and installable offline PWA.
-- No backend, accounts, analytics or browser storage.
 
-## Run
-Use HTTPS or localhost for Web Crypto, clipboard and service-worker support. GitHub Pages: Settings → Pages → Deploy from a branch → main → /(root).
+- Password strength score, checklist and smart recommendations
+- Entropy estimate and illustrative crack-time model
+- Cryptographically secure password generator
+- Random multi-word passphrase generator
+- Optional breach lookup using Have I Been Pwned k-anonymity
+- Local password audit and password-free JSON reports
+- Dark / light theme and offline PWA support
 
-URL: https://codex-inn.github.io/Password-Strength-Checker/
+## Live Demo
 
-## Privacy
-Analysis, generation and audits run locally. No password is persisted. Optional breach lookup contacts api.pwnedpasswords.com with only a 5-character SHA-1 prefix; request metadata is still visible to that service. Do not submit sensitive live credentials. Reports omit password text. The service worker caches only static app files.
+https://codex-inn.github.io/Password-Strength-Checker/
 
-## Limitations
-Entropy is an upper-bound estimate based on character classes and assumes random selection; human-chosen patterns reduce real entropy. Guessing time assumes 10 billion guesses/second and half the search space; actual rates vary by hashing algorithm, hardware, salts and attacker knowledge. A clean breach lookup is not proof of safety. The built-in passphrase list is small; prefer a reputable password manager.
+## Run Locally
 
-Use unique passwords and passkeys where supported.
+1. Clone or download this repository.
+2. Open the project using a local development server (such as VS Code Live Server).
+3. Visit the local URL in a modern browser.
+
+For Web Crypto and offline support, use **HTTPS or localhost**.
+
+## Privacy & Security
+
+- Password analysis, generation and audits run in your browser.
+- Passwords are not uploaded or saved in browser storage.
+- The optional breach check sends only the first 5 characters of a SHA-1 hash to the Pwned Passwords API—not the password or full hash.
+- Exported reports do not contain password values.
+
+**Note:** Entropy and crack-time values are educational estimates, not security guarantees. A clean breach result does not prove a password is safe. Use unique passwords and a trusted password manager.
+
+## Tech Stack
+
+HTML · CSS · JavaScript · Web Crypto API · PWA
+
+## License
+
+MIT
