@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f6f8fc">
+  <meta name="description" content="A privacy-first password strength checker and secure password generator that works locally in your browser.">
+  <title>SecureCheck — Password Strength Checker</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="./" aria-label="SecureCheck home">
+      <span class="brand-mark" aria-hidden="true">S</span>
+      <span>Secure<span class="brand-accent">Check</span></span>
+    </a>
+    <span class="topbar-label"><span class="status-dot"></span> PRIVACY-FIRST SECURITY TOOL</span>
+  </header>
+
+  <main class="page-shell">
+    <section class="intro">
+      <div class="eyebrow"><span class="eyebrow-line"></span> YOUR DIGITAL SAFETY STARTS HERE</div>
+      <h1>Make every password<br><span>count.</span></h1>
+      <p class="intro-copy">Check password habits, get practical security tips, and create stronger passwords — all on your device.</p>
+      <div class="trust-row">
+        <span><span aria-hidden="true">✓</span> No account needed</span>
+        <span><span aria-hidden="true">✓</span> No password uploads</span>
+        <span><span aria-hidden="true">✓</span> Free to use</span>
+      </div>
+    </section>
+
+    <section class="tool-grid" aria-label="Password tools">
+      <article class="panel checker-panel">
+        <div class="panel-heading">
+          <div>
+            <div class="panel-kicker">01 / PASSWORD CHECK</div>
+            <h2>Test your password</h2>
+            <p>Enter a sample password to see how it holds up.</p>
+          </div>
+          <span class="panel-icon shield-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none"><path d="M12 3 19 6v5c0 4.8-2.9 8-7 10-4.1-2-7-5.2-7-10V6l7-3Z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><path d="m9 12 2 2 4-4" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </span>
+        </div>
+
+        <label class="field-label" for="password">PASSWORD</label>
+        <div class="input-wrap">
+          <input id="password" type="password" placeholder="Type a password to check..." autocomplete="off" autocapitalize="off" spellcheck="false" aria-describedby="privacy-hint">
+          <button class="visibility-button" id="togglePassword" type="button" aria-label="Show password" aria-pressed="false">
+            <svg class="eye-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M2.5 12s3.4-6 9.5-6 9.5 6 9.5 6-3.4 6-9.5 6-9.5-6-9.5-6Z" stroke="currentColor" stroke-width="1.7"/><circle cx="12" cy="12" r="2.7" stroke="currentColor" stroke-width="1.7"/></svg>
+          </button>
+        </div>
+        <p class="privacy-hint" id="privacy-hint"><span aria-hidden="true">🔒</span> Your input stays in this browser tab.</p>
+
+        <div class="strength-summary">
+          <div>
+            <span class="field-label">STRENGTH ESTIMATE</span>
+            <strong id="strengthText" class="strength-value" aria-live="polite">Not checked</strong>
+          </div>
+          <span class="score-pill" id="scoreText">— / 100</span>
+        </div>
+        <div class="meter-track" id="strengthMeter" role="progressbar" aria-label="Estimated password strength" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+          <span class="meter-fill" id="strengthBar"></span>
+        </div>
+
+        <div class="requirements-heading">
+          <span class="field-label">PASSWORD CHECKLIST</span>
+          <span id="checksCount">0 of 5</span>
+        </div>
+        <ul class="requirements" aria-label="Password requirements">
+          <li id="rule-length"><span class="rule-icon" aria-hidden="true">○</span><span>At least 12 characters</span></li>
+          <li id="rule-upper"><span class="rule-icon" aria-hidden="true">○</span><span>Uppercase letter (A–Z)</span></li>
+          <li id="rule-lower"><span class="rule-icon" aria-hidden="true">○</span><span>Lowercase letter (a–z)</span></li>
+          <li id="rule-number"><span class="rule-icon" aria-hidden="true">○</span><span>Number (0–9)</span></li>
+          <li id="rule-symbol"><span class="rule-icon" aria-hidden="true">○</span><span>Special character (!@#)</span></li>
+        </ul>
+
+        <div class="tips-card">
+          <div class="tips-title"><span aria-hidden="true">✦</span> Security tips</div>
+          <p id="securityTips" aria-live="polite">Your personalized recommendations will appear here as you type.</p>
+        </div>
+        <button class="text-button" id="clearButton" type="button">Clear password <span aria-hidden="true">↗</span></button>
+      </article>
+
+      <article class="panel generator-panel">
+        <div class="panel-heading">
+          <div>
+            <div class="panel-kicker">02 / PASSWORD GENERATOR</div>
+            <h2>Create a strong one</h2>
+            <p>Generate a random password with the options you choose.</p>
+          </div>
+          <span class="panel-icon bolt-icon" aria-hidden="true">✳</span>
+        </div>
+
+        <div class="length-row">
+          <label class="field-label" for="passwordLength">PASSWORD LENGTH</label>
+          <output id="lengthValue" for="passwordLength">20</output>
+        </div>
+        <input class="range-control" id="passwordLength" type="range" min="8" max="64" value="20">
+
+        <fieldset class="character-options">
+          <legend class="field-label">INCLUDE CHARACTERS</legend>
+          <label class="option"><input type="checkbox" id="genUpper" checked><span class="custom-check"></span> Uppercase <span class="option-sample">ABC</span></label>
+          <label class="option"><input type="checkbox" id="genLower" checked><span class="custom-check"></span> Lowercase <span class="option-sample">abc</span></label>
+          <label class="option"><input type="checkbox" id="genNumbers" checked><span class="custom-check"></span> Numbers <span class="option-sample">123</span></label>
+          <label class="option"><input type="checkbox" id="genSymbols" checked><span class="custom-check"></span> Symbols <span class="option-sample">!@#</span></label>
+        </fieldset>
+
+        <button class="primary-button" id="generateButton" type="button">
+          <span aria-hidden="true">✳</span> Generate password
+        </button>
+
+        <label class="field-label generated-label" for="generatedPassword">YOUR GENERATED PASSWORD</label>
+        <div class="generated-wrap">
+          <input id="generatedPassword" type="text" placeholder="Your password will appear here" readonly autocomplete="off" spellcheck="false">
+          <button class="copy-button" id="copyButton" type="button" aria-label="Copy generated password">
+            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="8" y="8" width="12" height="12" rx="2" stroke="currentColor" stroke-width="1.7"/><path d="M16 8V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2" stroke="currentColor" stroke-width="1.7"/></svg>
+            Copy
+          </button>
+        </div>
+        <p class="action-status" id="actionStatus" role="status" aria-live="polite"></p>
+        <div class="generator-note"><span aria-hidden="true">✓</span> Generated using your browser's cryptographic random number generator.</div>
+      </article>
+    </section>
+
+    <aside class="privacy-banner" id="privacy">
+      <span class="privacy-banner-icon" aria-hidden="true">🔐</span>
+      <div>
+        <h3>Your privacy is built in.</h3>
+        <p>SecureCheck processes passwords locally. It does not send them to a server, save them in browser storage, or include analytics. For best protection, use a unique password for every account and store it in a trusted password manager.</p>
+      </div>
+      <span class="privacy-badge">LOCAL ONLY</span>
+    </aside>
+
+    <p class="disclaimer">Educational tool · Strength labels are estimates, not a guarantee against guessing or cracking.</p>
+  </main>
+
+  <footer class="footer">
+    <a class="brand footer-brand" href="./"><span class="brand-mark">S</span><span>Secure<span class="brand-accent">Check</span></span></a>
+    <span>Built for safer digital habits <span aria-hidden="true">·</span> 2026</span>
+  </footer>
+</body>
+</html>
